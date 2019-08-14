@@ -262,7 +262,7 @@ class RUG extends React.Component {
         }
 
         this.setState({
-            images: images.concat(this.state.images)
+            images: this.state.images.concat(images)
         }, () => {
             if ( this.props.autoUpload ) {
                 images.forEach(image => this.upload(image))
