@@ -33,13 +33,13 @@ class RUG extends React.Component {
 
         
         this.state = {
-            images: initialState.reverse().map(item => {
+            images: initialState.map(item => {
 
                 return this.create({
                     done: true,
                     ...item
                 })
-            }).reverse(),
+            }),
 
             renderComponent: !ssrSupport
         }

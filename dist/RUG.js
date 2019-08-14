@@ -68,11 +68,11 @@ function (_React$Component) {
     _this.requests = [];
     _this.increment = 0;
     _this.state = {
-      images: initialState.reverse().map(function (item) {
+      images: initialState.map(function (item) {
         return _this.create(_objectSpread({
           done: true
         }, item));
-      }).reverse(),
+      }),
       renderComponent: !ssrSupport
     };
     return _this;
