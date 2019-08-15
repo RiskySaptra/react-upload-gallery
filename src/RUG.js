@@ -179,7 +179,7 @@ class RUG extends React.Component {
                 uploading: false,
                 progress: 100
             }, 
-            () => this.props.onSuccess(this.state.images.find(item => item.uid === uid))
+            () => this.props.onSuccess(this.state.images.find(item => item.uid === uid), response)
         )
     }
 

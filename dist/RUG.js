@@ -308,7 +308,7 @@ function (_React$Component) {
       }, function () {
         return _this7.props.onSuccess(_this7.state.images.find(function (item) {
           return item.uid === uid;
-        }));
+        }), response);
       });
     }
   }, {
