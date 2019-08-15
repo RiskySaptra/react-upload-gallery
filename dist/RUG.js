@@ -82,7 +82,7 @@ function (_React$Component) {
           ssrSupport = _this$props.ssrSupport,
           onChange = _this$props.onChange; // start application send initialState images
 
-      onChange(this.state.images); // ssrSupport
+      onChange(this.state.images, 'initial'); // ssrSupport
 
       if (ssrSupport) {
         this.setState({
@@ -264,7 +264,7 @@ function (_React$Component) {
                 this.setState({
                   images: images
                 }, function () {
-                  _this6.props.onChange(_this6.state.images);
+                  _this6.props.onChange(_this6.state.images, 'removed');
 
                   if (deletedImage) {
                     _this6.props.onDeleted(deletedImage, _this6.state.images);
@@ -379,7 +379,7 @@ function (_React$Component) {
           });
         })
       }, function () {
-        return _this10.props.onChange(_this10.state.images);
+        return _this10.props.onChange(_this10.state.images, 'selected');
       });
     }
   }, {
@@ -484,7 +484,7 @@ function (_React$Component) {
                     });
                   }
 
-                  _this11.props.onChange(_this11.state.images);
+                  _this11.props.onChange(_this11.state.images, 'added');
                 });
 
               case 36:
@@ -662,7 +662,7 @@ function (_React$Component) {
       this.setState({
         images: images
       }, function () {
-        return _this13.props.onChange(images);
+        return _this13.props.onChange(images, 'sorted');
       });
     }
   }, {

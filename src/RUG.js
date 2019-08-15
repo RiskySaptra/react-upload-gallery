@@ -44,7 +44,7 @@ class RUG extends React.Component {
 
         
         // start application send initialState images
-        onChange(this.state.images)
+        onChange(this.state.images, 'initial')
 
 
         // ssrSupport
@@ -151,7 +151,7 @@ class RUG extends React.Component {
         }
 
         this.setState({ images }, () => {
-            this.props.onChange(this.state.images)
+            this.props.onChange(this.state.images, 'removed')
 
             if ( deletedImage ) {
                 this.props.onDeleted(deletedImage, this.state.images)
@@ -240,9 +240,7 @@ class RUG extends React.Component {
                 })
             )
         },
-        () => this.props.onChange(
-                this.state.images
-            )
+        () => this.props.onChange(this.state.images, 'selected')
         )
     }
 
@@ -278,7 +276,7 @@ class RUG extends React.Component {
                 images.forEach(image => this.upload(image))
             }
 
-            this.props.onChange(this.state.images)
+            this.props.onChange(this.state.images, 'added')
         })
     }
 
@@ -376,7 +374,7 @@ class RUG extends React.Component {
     }
 
     setSort( images ) {
-        this.setState({ images }, () => this.props.onChange(images))
+        this.setState({ images }, () => this.props.onChange(images, 'sorted'))
     }
 
     showChildren(options) {
