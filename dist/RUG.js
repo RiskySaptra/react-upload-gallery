@@ -624,7 +624,8 @@ function (_React$Component) {
     value: function upload(_ref3) {
       var uid = _ref3.uid,
           file = _ref3.file,
-          data = _ref3.data;
+          data = _ref3.data,
+          name = _ref3.name;
       var _this$props3 = this.props,
           action = _this$props3.action,
           headers = _this$props3.headers,

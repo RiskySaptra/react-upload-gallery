@@ -354,7 +354,7 @@ class RUG extends React.Component {
         return ImageURL
     }
 
-    upload ({ uid, file, data }) {
+    upload ({ uid, file, data, name }) {
         const { action, headers, customRequest } = this.props
 
         const request = customRequest || Request
