@@ -355,10 +355,10 @@ class RUG extends React.Component {
     }
 
     upload ({ uid, file, data }) {
-        const { send, action, headers, customRequest } = this.props
+        const { action, headers, customRequest } = this.props
 
         const request = customRequest || Request
-        
+        const send = { uid, name }
         const { abort } = request({
             uid,
             file,
