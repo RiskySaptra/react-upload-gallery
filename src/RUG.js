@@ -21,6 +21,7 @@ class RUG extends React.Component {
         this.fileInput = React.createRef()
         this.setSort = this.setSort.bind(this)
         this.uploadFiles = this.uploadFiles.bind(this)
+        this.replaceImages = this.replaceImages.bind(this)
         this.openDialogue = this.openDialogue.bind(this)
 
         this.onProgress = this.onProgress.bind(this)

@@ -60,6 +60,7 @@ function (_React$Component) {
     _this.fileInput = _react["default"].createRef();
     _this.setSort = _this.setSort.bind((0, _assertThisInitialized2["default"])(_this));
     _this.uploadFiles = _this.uploadFiles.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.replaceImages = _this.replaceImages.bind((0, _assertThisInitialized2["default"])(_this));
     _this.openDialogue = _this.openDialogue.bind((0, _assertThisInitialized2["default"])(_this));
     _this.onProgress = _this.onProgress.bind((0, _assertThisInitialized2["default"])(_this));
     _this.onSuccess = _this.onSuccess.bind((0, _assertThisInitialized2["default"])(_this));
@@ -68,11 +69,7 @@ function (_React$Component) {
     _this.requests = [];
     _this.increment = 0;
     _this.state = {
-      images: initialState.map(function (item) {
-        return _this.create(_objectSpread({
-          done: true
-        }, item));
-      }),
+      images: _this.convertImages(initialState),
       renderComponent: !ssrSupport
     };
     return _this;
@@ -123,16 +120,34 @@ function (_React$Component) {
       return item;
     }
   }, {
+    key: "convertImages",
+    value: function convertImages(images) {
+      var _this3 = this;
+
+      return images.map(function (item) {
+        return _this3.create(_objectSpread({
+          done: true
+        }, item));
+      });
+    }
+  }, {
+    key: "replaceImages",
+    value: function replaceImages(images) {
+      this.setState({
+        images: this.convertImages(images)
+      });
+    }
+  }, {
     key: "refresh",
     value: function refresh(uid, data) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.setImage(uid, {
         error: false,
         done: false,
         progress: 0
       }, function (image) {
-        _this3.upload(image);
+        _this4.upload(image);
       });
     }
   }, {
@@ -141,7 +156,7 @@ function (_React$Component) {
       var _tryUpload = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee(uid, file) {
-        var _this4 = this;
+        var _this5 = this;
 
         var changes, source;
         return _regenerator["default"].wrap(function _callee$(_context) {
@@ -172,7 +187,7 @@ function (_React$Component) {
                   done: false,
                   progress: 0
                 }), function (image) {
-                  return _this4.upload(image);
+                  return _this5.upload(image);
                 });
                 _context.next = 12;
                 break;
@@ -201,7 +216,7 @@ function (_React$Component) {
       var _remove = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee2(uid) {
-        var _this5 = this;
+        var _this6 = this;
 
         var images, deletedImage, key, image;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
@@ -249,10 +264,10 @@ function (_React$Component) {
                 this.setState({
                   images: images
                 }, function () {
-                  _this5.props.onChange(_this5.state.images);
+                  _this6.props.onChange(_this6.state.images);
 
                   if (deletedImage) {
-                    _this5.props.onDeleted(deletedImage, _this5.state.images);
+                    _this6.props.onDeleted(deletedImage, _this6.state.images);
                   }
                 });
 
@@ -280,7 +295,7 @@ function (_React$Component) {
   }, {
     key: "onSuccess",
     value: function onSuccess(uid, response) {
-      var _this6 = this;
+      var _this7 = this;
 
       var source = this.props.source;
       source = typeof source === 'function' ? source(response) : response.source;
@@ -291,7 +306,7 @@ function (_React$Component) {
         uploading: false,
         progress: 100
       }, function () {
-        return _this6.props.onSuccess(_this6.state.images.find(function (item) {
+        return _this7.props.onSuccess(_this7.state.images.find(function (item) {
           return item.uid === uid;
         }));
       });
@@ -299,7 +314,7 @@ function (_React$Component) {
   }, {
     key: "onError",
     value: function onError(uid, _ref2) {
-      var _this7 = this;
+      var _this8 = this;
 
       var status = _ref2.status,
           response = _ref2.response;
@@ -308,10 +323,10 @@ function (_React$Component) {
         error: true,
         uploading: false,
         refresh: function refresh(data) {
-          return _this7.refresh(uid, data);
+          return _this8.refresh(uid, data);
         }
       }, function (image) {
-        _this7.props.onError({
+        _this8.props.onError({
           status: status,
           response: response,
           image: image
@@ -333,7 +348,7 @@ function (_React$Component) {
   }, {
     key: "setImage",
     value: function setImage(uid, append, finish) {
-      var _this8 = this;
+      var _this9 = this;
 
       var image,
           images = this.state.images;
@@ -349,13 +364,13 @@ function (_React$Component) {
       }, function () {
         if (finish) finish(image);
 
-        _this8.props.onChange(images);
+        _this9.props.onChange(images);
       });
     }
   }, {
     key: "onSelected",
     value: function onSelected(uid) {
-      var _this9 = this;
+      var _this10 = this;
 
       this.setState({
         images: this.state.images.map(function (item) {
@@ -364,7 +379,7 @@ function (_React$Component) {
           });
         })
       }, function () {
-        return _this9.props.onChange(_this9.state.images);
+        return _this10.props.onChange(_this10.state.images);
       });
     }
   }, {
@@ -378,7 +393,7 @@ function (_React$Component) {
       var _uploadFiles = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee3(files) {
-        var _this10 = this;
+        var _this11 = this;
 
         var images, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, file, source, image;
 
@@ -463,13 +478,13 @@ function (_React$Component) {
                 this.setState({
                   images: this.state.images.concat(images)
                 }, function () {
-                  if (_this10.props.autoUpload) {
+                  if (_this11.props.autoUpload) {
                     images.forEach(function (image) {
-                      return _this10.upload(image);
+                      return _this11.upload(image);
                     });
                   }
 
-                  _this10.props.onChange(_this10.state.images);
+                  _this11.props.onChange(_this11.state.images);
                 });
 
               case 36:
@@ -492,7 +507,7 @@ function (_React$Component) {
       var _getImageURLToBlob = (0, _asyncToGenerator2["default"])(
       /*#__PURE__*/
       _regenerator["default"].mark(function _callee4(file) {
-        var _this11 = this;
+        var _this12 = this;
 
         var images,
             _this$props2,
@@ -520,7 +535,7 @@ function (_React$Component) {
                 */
 
                 warning = function warning(key) {
-                  _this11.onWarning(key, _objectSpread({}, rules, {
+                  _this12.onWarning(key, _objectSpread({}, rules, {
                     accept: accept,
                     file: file
                   }));
@@ -638,12 +653,12 @@ function (_React$Component) {
   }, {
     key: "setSort",
     value: function setSort(images) {
-      var _this12 = this;
+      var _this13 = this;
 
       this.setState({
         images: images
       }, function () {
-        return _this12.props.onChange(images);
+        return _this13.props.onChange(images);
       });
     }
   }, {
@@ -672,7 +687,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this13 = this;
+      var _this14 = this;
 
       // states
       var _this$state = this.state,
@@ -713,7 +728,7 @@ function (_React$Component) {
           return "image/".concat(type);
         }),
         onChange: function onChange(event) {
-          return _this13.uploadFiles(event.target.files);
+          return _this14.uploadFiles(event.target.files);
         }
       })));
     }
