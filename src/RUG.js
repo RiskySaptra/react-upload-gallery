@@ -33,14 +33,7 @@ class RUG extends React.Component {
 
         
         this.state = {
-            images: initialState.map(item => {
-
-                return this.create({
-                    done: true,
-                    ...item
-                })
-            }),
-
+            images: this.convertImages(initialState),
             renderComponent: !ssrSupport
         }
     }
@@ -80,6 +73,22 @@ class RUG extends React.Component {
         return item
     }
 
+    convertImages(images) {
+        return images.map(item => {
+
+            return this.create({
+                done: true,
+                ...item
+            })
+        })
+    }
+
+    replaceImages(images) {
+        this.setState({
+            images: this.convertImages(images)
+        });
+    }
+    
     refresh(uid, data) {
         this.setImage(
             uid,
