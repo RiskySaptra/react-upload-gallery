@@ -626,11 +626,14 @@ function (_React$Component) {
           file = _ref3.file,
           data = _ref3.data;
       var _this$props3 = this.props,
-          send = _this$props3.send,
           action = _this$props3.action,
           headers = _this$props3.headers,
           customRequest = _this$props3.customRequest;
       var request = customRequest || _Request["default"];
+      var send = {
+        uid: uid,
+        name: name
+      };
 
       var _request = request({
         uid: uid,
