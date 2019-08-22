@@ -87,6 +87,8 @@ class RUG extends React.Component {
     replaceImages(images) {
         this.setState({
             images: this.convertImages(images)
+        }, () => {
+            this.props.onChange(this.state.images, 'initial')
         });
     }
     
